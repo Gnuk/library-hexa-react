@@ -1,4 +1,4 @@
-import { dataSelector } from '../Utils';
+import { dataSelector, loadLanguage } from '../Utils';
 
 const BOOK = {
   title: 'Domain-driven design',
@@ -30,12 +30,23 @@ const stubOpenLibraryIsbnPending = () =>
     });
 
 describe('Library', () => {
-  it('Should be loading before result', () => {
-    stubOpenLibraryIsbnPending();
 
-    cy.visit('/');
+  describe('Should be loading before result', () => {
+    beforeEach(() => {
+      stubOpenLibraryIsbnPending();
+    });
 
-    cy.contains(dataSelector('book.loading'), 'In progress');
+    it('Should be loading before result', () => {
+      cy.visit('/', loadLanguage('en'));
+
+      cy.contains(dataSelector('book.loading'), 'In progress');
+    });
+
+    it('Should be loading before result', () => {
+      cy.visit('/', loadLanguage('fr'));
+
+      cy.contains(dataSelector('book.loading'), 'En cours');
+    });
   });
 
   it('Should not show book with network error', () => {
@@ -61,5 +72,23 @@ describe('Library', () => {
 
     cy.contains(dataSelector('book.title'), 'Domain-driven design');
     cy.contains(dataSelector('book.isbn'), '9780321125217');
+  });
+
+  describe('Translations', () => {
+    it('Should have english labels', () => {
+      stubOpenLibraryIsbn();
+
+      cy.visit('/', loadLanguage('en'));
+
+      cy.contains(dataSelector('book.label.title'), 'Title: ');
+    });
+
+    it('Should have french labels', () => {
+      stubOpenLibraryIsbn();
+
+      cy.visit('/', loadLanguage('fr'));
+
+      cy.contains(dataSelector('book.label.title'), 'Titre : ');
+    });
   });
 });

@@ -1,4 +1,10 @@
-export const About = () => (<>
-  <h2 data-selector="about.title">About title</h2>
-  <p data-selector="about.description">About description</p>
-</>);
+import { useTranslation } from 'react-i18next';
+
+export const About = () => {
+  const {t} = useTranslation();
+
+  return(<>
+    <h2 data-selector="about.title">{t('about.title')}</h2>
+    <p data-selector="about.description">{t('about.description')}</p>
+  </>);
+}
