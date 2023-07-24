@@ -1,4 +1,4 @@
-const dataSelector = (selector: string) => `[data-selector="${selector}"]`;
+import { dataSelector } from '../Utils';
 
 const BOOK = {
   title: 'Domain-driven design',
