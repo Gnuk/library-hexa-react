@@ -9,4 +9,4 @@ interface BooksOptions {
 
 export const BooksContext = provideContext<Books>();
 
-export const provideBooks = ({axiosInstance}: BooksOptions): Books => new RestBooks(axiosInstance)
+export const provideBooks = ({axiosInstance}: BooksOptions): Books => new RestBooks(axiosInstance);
