@@ -9,8 +9,11 @@
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "test": "vitest",
+    "test:ci": "vitest run --coverage",
     "test:component": "start-server-and-test dev http://localhost:3030 test:component:open",
-    "test:component:open": "cypress open --config-file test/component/cypress.config.ts"
+    "test:component:ci": "start-server-and-test dev http://localhost:3030 test:component:run",
+    "test:component:open": "cypress open --config-file test/component/cypress.config.ts",
+    "test:component:run": "cypress run --config-file test/component/cypress.config.ts"
   },
   "dependencies": {
     "i18next": "^23.2.11",
@@ -28,6 +31,7 @@
     "@typescript-eslint/eslint-plugin": "^6.2.0",
     "@typescript-eslint/parser": "^6.2.0",
     "@vitejs/plugin-react": "^4.0.1",
+    "@vitest/coverage-v8": "^0.33.0",
     "axios": "^1.4.0",
     "cypress": "^12.17.1",
     "eslint": "^8.46.0",

@@ -10,6 +10,7 @@ lerna-debug.log*
 /test/component/downloads
 /test/component/screenshots
 /test/component/videos
+/coverage
 
 node_modules
 dist
