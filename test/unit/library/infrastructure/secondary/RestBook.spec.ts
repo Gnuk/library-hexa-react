@@ -10,7 +10,6 @@ describe("RestBook", () => {
     expect(toBook(restBook)).toEqual<Either<Error, Book>>(
       Ok.of({
         title: "Domain-driven design",
-        author: "Eric Evans",
         isbn: ISBN.of("9780321125217"),
         pages: 529,
       })

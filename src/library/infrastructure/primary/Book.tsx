@@ -1,10 +1,11 @@
-import { useContext, useState } from 'react';
-import { BooksContext } from '@/library/application/BooksContext';
+import { useState } from 'react';
 import { useLoadEither } from '@/library/infrastructure/primary/UseLoad';
 import { useTranslation } from 'react-i18next';
+import { inject } from '@/injections.ts';
+import { BOOKS } from '@/library/application/LibraryKeys.ts';
 
 export const Book = () => {
-  const books = useContext(BooksContext);
+  const books = inject(BOOKS);
 
   const {t} = useTranslation();
   const [title, setTitle] = useState('');

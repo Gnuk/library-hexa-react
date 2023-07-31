@@ -1,6 +1,5 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import axios from 'axios';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { libraryRoutes } from '@/library/application/LibraryRoutes.tsx';
 import { staticRoutes } from '@/static/StaticRoutes.tsx';
@@ -10,12 +9,9 @@ import { staticTranslations } from '@/static/language/StaticTranslations.ts';
 import LanguageDetector from 'i18next-browser-languagedetector';
 import { libraryTranslations } from '@/library/application/language/LibraryTranslations.ts';
 import { toTranslationResources } from '@/Translations.ts';
+import { libraryProvider } from '@/library/application/LibraryProvider.ts';
 
-const axiosOpenLibrary = axios.create({
-  baseURL: "https://openlibrary.org",
-});
-
-const router = createBrowserRouter([libraryRoutes(axiosOpenLibrary), ...staticRoutes]);
+const router = createBrowserRouter([libraryRoutes, ...staticRoutes]);
 
 void i18n
   .use(initReactI18next)
@@ -27,6 +23,8 @@ void i18n
       escapeValue: false,
     }
   });
+
+libraryProvider();
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
