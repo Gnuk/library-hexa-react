@@ -1,5 +1,5 @@
 import { Either } from '@/functional/Either';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const IN_PROGRESS = Symbol();
 const SUCCESS = Symbol();
@@ -32,7 +32,9 @@ export const useLoadEither = <T>(promise: Promise<Either<Error, T>>, then: (valu
       setStatus(SUCCESS);
     });
 
-  promise.then(successLoad).catch(errorLoad);
+  useEffect(() => {
+    promise.then(successLoad).catch(errorLoad)
+  }, []);
 
   const is = (to: LoadingStatus): boolean => status === to;
 
