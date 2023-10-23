@@ -11,6 +11,7 @@ lerna-debug.log*
 /test/component/screenshots
 /test/component/videos
 /coverage
+/.npmrc
 
 node_modules
 dist

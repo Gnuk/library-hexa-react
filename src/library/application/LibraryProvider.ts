@@ -3,7 +3,7 @@ import { provide } from '@/injections.ts';
 import { BOOKS } from '@/library/application/LibraryKeys.ts';
 import { RestBooks } from '@/library/infrastructure/secondary/RestBooks.ts';
 
-export const libraryProvider = () => {
+export const libraryProvider = (): void => {
   const axiosOpenLibrary = axios.create({
     baseURL: "https://openlibrary.org",
   });
