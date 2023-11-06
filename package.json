@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0 --ignore-path .gitignore",
+    "lint:fix": "npm run lint -- --fix",
     "preview": "vite preview",
     "test": "vitest",
     "test:ci": "vitest run --coverage",
@@ -35,6 +36,7 @@
     "axios": "^1.4.0",
     "cypress": "^12.17.1",
     "eslint": "^8.46.0",
+    "eslint-plugin-prettier": "^5.0.1",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.1",
     "jsdom": "^22.1.0",

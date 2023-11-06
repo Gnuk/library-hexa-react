@@ -5,10 +5,10 @@ import { Contact } from '@/static/Contact.tsx';
 export const staticRoutes: RouteObject[] = [
   {
     path: '/about',
-    element: <About />
+    element: <About />,
   },
   {
     path: '/contact',
-    element: <Contact />
+    element: <Contact />,
   },
 ];

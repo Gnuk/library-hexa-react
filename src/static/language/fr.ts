@@ -1,6 +1,6 @@
 import { Translation } from '@/Translations.ts';
 
-export const fr: Translation = ({
+export const fr: Translation = {
   about: {
     title: 'Titre à propos',
     description: 'À propos de la description',
@@ -14,7 +14,7 @@ export const fr: Translation = ({
     },
   },
   contact: {
-    title: "Contactez-nous",
-    email: "library@contact.fr",
-  }
-})
+    title: 'Contactez-nous',
+    email: 'library@contact.fr',
+  },
+};

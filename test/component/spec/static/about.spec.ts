@@ -24,19 +24,19 @@ describe('About', () => {
     it('should open for more info', () => {
       cy.get(dataSelector('about.more-info.button')).click();
 
-      cy.contains(dataSelector('modal.title'), 'More info')
+      cy.contains(dataSelector('modal.title'), 'More info');
     });
     it('should open for usage conditions', () => {
       cy.get(dataSelector('about.cgu.button')).click();
 
-      cy.contains(dataSelector('modal.title'), 'Usage conditions')
+      cy.contains(dataSelector('modal.title'), 'Usage conditions');
     });
     it('should close', () => {
       cy.get(dataSelector('about.more-info.button')).click();
 
       cy.get(dataSelector('modal.close')).click();
 
-      cy.get(dataSelector('modal.title')).should('not.exist')
+      cy.get(dataSelector('modal.title')).should('not.exist');
     });
   });
 });

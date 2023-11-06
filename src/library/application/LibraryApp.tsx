@@ -1,3 +1,3 @@
 import { Outlet } from 'react-router-dom';
 
-export const LibraryApp = () => (<Outlet/>);
+export const LibraryApp = () => <Outlet />;

@@ -1,11 +1,8 @@
-import { defineConfig } from "cypress";
+import { defineConfig } from 'cypress';
 
 export default defineConfig({
   e2e: {
     baseUrl: 'http://localhost:3030',
-    setupNodeEvents(on, config) {
-      // implement node event listeners here
-    },
     downloadsFolder: 'test/component/downloads',
     specPattern: 'test/component/**/*.spec.ts',
     supportFile: 'test/component/support/e2e.ts',

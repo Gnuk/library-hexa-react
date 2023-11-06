@@ -6,8 +6,7 @@ const BOOK = {
   number_of_pages: 42,
 };
 
-const stubOpenLibraryIsbn = () =>
-  cy.intercept('https://openlibrary.org/isbn/9780321125217.json', BOOK);
+const stubOpenLibraryIsbn = () => cy.intercept('https://openlibrary.org/isbn/9780321125217.json', BOOK);
 
 const stubOpenLibraryIsbnInvalid = () =>
   cy.intercept('https://openlibrary.org/isbn/9780321125217.json', {
@@ -23,14 +22,12 @@ const stubOpenLibraryIsbnNetworkError = () =>
   });
 
 const stubOpenLibraryIsbnPending = () =>
-  cy.intercept('https://openlibrary.org/isbn/9780321125217.json',
-    {
-      delay: 1000,
-      body: BOOK,
-    });
+  cy.intercept('https://openlibrary.org/isbn/9780321125217.json', {
+    delay: 1000,
+    body: BOOK,
+  });
 
 describe('Library', () => {
-
   describe('Should be loading before result', () => {
     beforeEach(() => {
       stubOpenLibraryIsbnPending();

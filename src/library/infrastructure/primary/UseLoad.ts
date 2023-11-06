@@ -5,10 +5,7 @@ const IN_PROGRESS = Symbol();
 const SUCCESS = Symbol();
 const FAILURE = Symbol();
 
-type LoadingStatus =
-  | typeof IN_PROGRESS
-  | typeof SUCCESS
-  | typeof FAILURE;
+type LoadingStatus = typeof IN_PROGRESS | typeof SUCCESS | typeof FAILURE;
 
 interface Loaded {
   errorMessage: string;
@@ -21,22 +18,22 @@ export const useLoadEither = <T>(promise: Promise<Either<Error, T>>, then: (valu
   const [errorMessage, setErrorMessage] = useState('');
   const [status, setStatus] = useState<LoadingStatus>(IN_PROGRESS);
 
-  const errorLoad = (err: Error) => {
-    setErrorMessage(err.message);
-    setStatus(FAILURE);
-  };
-
-  const successLoad = (either: Either<Error, T>) =>
-    either.evaluate(errorLoad, (value) => {
-      then(value);
-      setStatus(SUCCESS);
-    });
-
   useEffect(() => {
-    promise.then(successLoad).catch(errorLoad)
-  }, []);
+    const errorLoad = (err: Error) => {
+      setErrorMessage(err.message);
+      setStatus(FAILURE);
+    };
+
+    const successLoad = (either: Either<Error, T>) =>
+      either.evaluate(errorLoad, value => {
+        then(value);
+        setStatus(SUCCESS);
+      });
+
+    promise.then(successLoad).catch(errorLoad);
+  }, [promise, then]);
 
   const is = (to: LoadingStatus): boolean => status === to;
 
-  return {isInProgress: is(IN_PROGRESS), isSuccessful: is(SUCCESS), isFailing: is(FAILURE), errorMessage};
-}
+  return { isInProgress: is(IN_PROGRESS), isSuccessful: is(SUCCESS), isFailing: is(FAILURE), errorMessage };
+};

@@ -34,7 +34,7 @@ class EmptyOptional<T> extends Optional<T> {
   }
 
   get(): T {
-    throw new Error("Empty optional");
+    throw new Error('Empty optional');
   }
 
   chain<U>(): Optional<U> {

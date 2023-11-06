@@ -1,4 +1,4 @@
-import { ISBN } from "@/library/domain/ISBN.ts";
+import { ISBN } from '@/library/domain/ISBN.ts';
 
 export interface Book {
   isbn: ISBN;
