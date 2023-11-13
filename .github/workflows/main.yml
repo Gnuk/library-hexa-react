@@ -1,0 +1,44 @@
+name: Main
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Use Node.js LTS
+        uses: actions/setup-node@v4
+        with:
+          cache: 'npm'
+          node-version: 'lts/*'
+      - name: node check
+        run: |
+          npm ci
+          npm test
+        env:
+          CI: true
+
+  status-checks:
+    name: status-checks
+    needs: [build]
+    permissions:
+      contents: none
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Validation Status checks
+        run: |
+          echo 'Configuration for Status checks that are required'
+          echo '${{ toJSON(needs) }}'
+          if [[ ('skipped' == '${{ needs.build.result }}') || ('success' == '${{ needs.build.result }}') ]]; then
+            exit 0
+          fi
+          exit 1

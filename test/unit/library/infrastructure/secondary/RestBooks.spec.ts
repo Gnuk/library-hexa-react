@@ -17,6 +17,8 @@ const stubAxiosInstance = (): AxiosInstanceStub =>
     get: sinon.stub(),
   }) as AxiosInstanceStub;
 
+const FAKE_ISBN = ISBN.of('9780321125217');
+
 describe('RestBooks', () => {
   it('Should get book', async () => {
     const axiosInstance = stubAxiosInstance();
@@ -26,7 +28,7 @@ describe('RestBooks', () => {
     axiosInstance.get.resolves(response);
     const repository = new RestBooks(axiosInstance);
 
-    const eitherBook = await repository.get();
+    const eitherBook = await repository.get(FAKE_ISBN);
 
     expect(axiosInstance.get.getCall(0).args).toContain('/isbn/9780321125217.json');
     expect(eitherBook).toEqual<Either<Error, Book>>(
@@ -43,7 +45,7 @@ describe('RestBooks', () => {
     axiosInstance.get.rejects(new Error('Network error'));
     const repository = new RestBooks(axiosInstance);
 
-    const eitherBook = await repository.get();
+    const eitherBook = await repository.get(FAKE_ISBN);
 
     expect(eitherBook).toEqual<Either<Error, Book>>(Err.of(new Error('Network error')));
   });
