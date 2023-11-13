@@ -5,13 +5,14 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "component:serve": "NODE_ENV=production vite",
     "build": "tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0 --ignore-path .gitignore",
     "lint:fix": "npm run lint -- --fix",
     "preview": "vite preview",
     "test": "vitest",
     "test:ci": "vitest run --coverage",
-    "test:component": "start-server-and-test dev http://localhost:3030 test:component:open",
+    "test:component": "start-server-and-test component:serve http://localhost:3030 test:component:open",
     "test:component:ci": "start-server-and-test dev http://localhost:3030 test:component:run",
     "test:component:open": "cypress open --config-file test/component/cypress.config.ts",
     "test:component:run": "cypress run --config-file test/component/cypress.config.ts"

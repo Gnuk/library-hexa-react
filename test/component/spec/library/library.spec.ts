@@ -6,7 +6,7 @@ const BOOK = {
   number_of_pages: 42,
 };
 
-const stubOpenLibraryIsbn = () => cy.intercept('https://openlibrary.org/isbn/9780321125217.json', BOOK);
+const stubOpenLibraryIsbn = () => cy.intercept('https://openlibrary.org/isbn/9780321125217.json', BOOK).as('BOOK');
 
 const stubOpenLibraryIsbnInvalid = () =>
   cy.intercept('https://openlibrary.org/isbn/9780321125217.json', {
@@ -34,13 +34,13 @@ describe('Library', () => {
     });
 
     it('Should be loading before result', () => {
-      cy.visit('/', loadLanguage('en'));
+      cy.visit('/book/9780321125217', loadLanguage('en'));
 
       cy.contains(dataSelector('book.loading'), 'In progress');
     });
 
     it('Should be loading before result', () => {
-      cy.visit('/', loadLanguage('fr'));
+      cy.visit('/book/9780321125217', loadLanguage('fr'));
 
       cy.contains(dataSelector('book.loading'), 'En cours');
     });
@@ -49,7 +49,7 @@ describe('Library', () => {
   it('Should not show book with network error', () => {
     stubOpenLibraryIsbnNetworkError();
 
-    cy.visit('/');
+    cy.visit('/book/9780321125217');
 
     cy.contains(dataSelector('book.error'), 'Request failed');
   });
@@ -57,7 +57,7 @@ describe('Library', () => {
   it('Should not show book with invalid ISBN', () => {
     stubOpenLibraryIsbnInvalid();
 
-    cy.visit('/');
+    cy.visit('/book/9780321125217');
 
     cy.contains(dataSelector('book.error'), 'Non digits are not allowed for ISBN');
   });
@@ -65,7 +65,7 @@ describe('Library', () => {
   it('Should get book', () => {
     stubOpenLibraryIsbn();
 
-    cy.visit('/');
+    cy.visit('/book/9780321125217');
 
     cy.contains(dataSelector('book.title'), 'Domain-driven design');
     cy.contains(dataSelector('book.isbn'), '9780321125217');
@@ -75,15 +75,15 @@ describe('Library', () => {
     it('Should have english labels', () => {
       stubOpenLibraryIsbn();
 
-      cy.visit('/', loadLanguage('en'));
+      cy.visit('/book/9780321125217', loadLanguage('en'));
 
       cy.contains(dataSelector('book.label.title'), 'Title: ');
     });
 
-    it('Should have french labels', () => {
+    it.only('Should have french labels', () => {
       stubOpenLibraryIsbn();
 
-      cy.visit('/', loadLanguage('fr'));
+      cy.visit('/book/9780321125217', loadLanguage('fr'));
 
       cy.contains(dataSelector('book.label.title'), 'Titre : ');
     });
