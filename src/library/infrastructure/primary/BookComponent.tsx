@@ -4,16 +4,20 @@ import { useTranslation } from 'react-i18next';
 import { inject } from '@/injections.ts';
 import { BOOKS } from '@/library/application/LibraryKeys.ts';
 import { Book } from '@/library/domain/Book.ts';
+import { ISBN } from '@/library/domain/ISBN.ts';
 
-export const BookComponent = () => {
+export const BookComponent = (props: { isbn: ISBN }) => {
   const books = inject(BOOKS);
 
   const { t } = useTranslation();
   const [book, setBook] = useState<Book>();
 
-  const { isInProgress, isFailing, isSuccessful, errorMessage } = useLoadEither(books.get(), book => {
-    setBook(book);
-  });
+  const { isInProgress, isFailing, isSuccessful, errorMessage } = useLoadEither(
+    () => books.get(props.isbn),
+    book => {
+      setBook(book);
+    }
+  );
 
   return (
     <>
