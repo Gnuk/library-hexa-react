@@ -14,7 +14,7 @@ interface Loaded {
   isFailing: boolean;
 }
 
-export const useLoadEither = <T>(promise: Promise<Either<Error, T>>, then: (value: T) => void): Loaded => {
+export const useLoadEither = <T>(promise: () => Promise<Either<Error, T>>, then: (value: T) => void): Loaded => {
   const [errorMessage, setErrorMessage] = useState('');
   const [status, setStatus] = useState<LoadingStatus>(IN_PROGRESS);
 
@@ -30,8 +30,8 @@ export const useLoadEither = <T>(promise: Promise<Either<Error, T>>, then: (valu
         setStatus(SUCCESS);
       });
 
-    promise.then(successLoad).catch(errorLoad);
-  }, [promise, then]);
+    promise().then(successLoad).catch(errorLoad);
+  }, []);
 
   const is = (to: LoadingStatus): boolean => status === to;
 
