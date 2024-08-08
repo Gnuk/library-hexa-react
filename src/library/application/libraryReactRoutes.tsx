@@ -8,7 +8,7 @@ const BooksPage = () => {
   return <BookComponent isbn={ISBN.of(isbn!)} />;
 };
 
-export const libraryRoutes: RouteObject = {
+export const libraryReactRoutes: RouteObject = {
   path: '/',
   element: <LibraryApp />,
   children: [

@@ -80,7 +80,7 @@ describe('Library', () => {
       cy.contains(dataSelector('book.label.title'), 'Title: ');
     });
 
-    it.only('Should have french labels', () => {
+    it('Should have french labels', () => {
       stubOpenLibraryIsbn();
 
       cy.visit('/book/9780321125217', loadLanguage('fr'));

@@ -1,13 +1,13 @@
 import { useTranslation } from 'react-i18next';
 import { inject } from '@/injections.ts';
-import { MODAL_ACTION } from '@/modal';
+import { REACT_MODAL_ACTION } from '@/modal/react';
 import { MoreInfo } from '@/static/about/MoreInfo.tsx';
 import { CGU } from '@/static/about/CGU.tsx';
 
 export const About = () => {
   const { t } = useTranslation();
 
-  const modal = inject(MODAL_ACTION);
+  const modal = inject(REACT_MODAL_ACTION);
 
   const moreInfo = () => {
     modal.open(<MoreInfo />);

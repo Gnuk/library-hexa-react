@@ -11,4 +11,10 @@ export default defineConfig({
   server: {
     port: 3030,
   },
+  envDir: path.resolve(__dirname, 'config', 'react'),
+  build: {
+    rollupOptions: {
+      external: [new RegExp(/\.vue/)],
+    },
+  },
 });

@@ -25,9 +25,29 @@ jobs:
         env:
           CI: true
 
+  cypress:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        browsers:
+          - chrome
+          - firefox
+          - edge
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Cypress run
+        uses: cypress-io/github-action@v6
+        with:
+          config-file: 'test/component/cypress.config.ts'
+          start: npm run vue:component:serve
+          browser: ${{ matrix.browsers }}
+
   status-checks:
     name: status-checks
-    needs: [build]
+    needs:
+      - build
+      - cypress
     permissions:
       contents: none
     if: always()
@@ -38,7 +58,7 @@ jobs:
         run: |
           echo 'Configuration for Status checks that are required'
           echo '${{ toJSON(needs) }}'
-          if [[ ('skipped' == '${{ needs.build.result }}') || ('success' == '${{ needs.build.result }}') ]]; then
+          if [[ (('skipped' == '${{ needs.build.result }}') || ('success' == '${{ needs.build.result }}')) && (('skipped' == '${{ needs.cypress.result }}') || ('success' == '${{ needs.cypress.result }}')) ]]; then
             exit 0
           fi
           exit 1
