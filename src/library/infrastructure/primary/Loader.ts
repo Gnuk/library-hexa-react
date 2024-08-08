@@ -1,8 +1,8 @@
 import { ReactElement } from 'react';
 
-const LoadingInProgress = Symbol();
-const LoadingError = Symbol();
-const LoadingSuccess = Symbol();
+export const LoadingInProgress = Symbol();
+export const LoadingError = Symbol();
+export const LoadingSuccess = Symbol();
 
 type LoadingStatus = typeof LoadingError | typeof LoadingInProgress | typeof LoadingSuccess;
 
@@ -10,17 +10,17 @@ interface LoadWithStatus {
   status: LoadingStatus;
 }
 
-interface LoadSuccess<T> extends LoadWithStatus {
+export interface LoadSuccess<T> extends LoadWithStatus {
   content: T;
   status: typeof LoadingSuccess;
 }
 
-interface LoadError extends LoadWithStatus {
+export interface LoadError extends LoadWithStatus {
   errorMessage: string;
   status: typeof LoadingError;
 }
 
-interface LoadInProgress extends LoadWithStatus {
+export interface LoadInProgress extends LoadWithStatus {
   status: typeof LoadingInProgress;
 }
 

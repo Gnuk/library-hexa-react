@@ -1,10 +1,10 @@
 import { inject } from '@/injections.ts';
-import { MODAL_ACTION, MODAL_LISTEN } from '@/modal/ModalKey.ts';
+import { REACT_MODAL_ACTION, REACT_MODAL_LISTEN } from '@/modal/ReactModalKey.ts';
 import { ReactNode, useEffect, useState } from 'react';
 
-export const ModalArea = () => {
-  const modal = inject(MODAL_LISTEN);
-  const modalAction = inject(MODAL_ACTION);
+export const ReactModalArea = () => {
+  const modal = inject(REACT_MODAL_LISTEN);
+  const modalAction = inject(REACT_MODAL_ACTION);
   const [body, setBody] = useState<ReactNode>();
   const [opened, setOpened] = useState<boolean>(false);
 

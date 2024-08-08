@@ -1,9 +1,7 @@
-import { ReactNode } from 'react';
-
-export class ModalAction {
+export class ModalAction<C> {
   constructor(private readonly doc: Document) {}
 
-  open(component: ReactNode) {
+  open(component: C) {
     const modalOpen = new CustomEvent('modal.open', { detail: component });
     this.doc.dispatchEvent(modalOpen);
   }

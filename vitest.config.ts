@@ -7,9 +7,10 @@ export default defineConfig({
     environment: 'jsdom',
     coverage: {
       include: ['src/**/*'],
+      provider: 'v8',
       exclude: [
-        'src/*.{ts,tsx}',
-        '**/index.{ts,tsx}',
+        'src/*.{ts,tsx,vue}',
+        '**/{index,react,vue}.{ts,tsx}',
         'src/**/primary/**/*',
         'src/**/application/**/*',
         'src/modal/**/*',
