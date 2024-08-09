@@ -4,7 +4,8 @@ import { inject } from '@/injections.ts';
 import { BOOKS } from '@/library/application/LibraryKeys.ts';
 import { Book } from '@/library/domain/Book.ts';
 import { ISBN } from '@/library/domain/ISBN.ts';
-import { Loader, loadError, loadFor, loadInProgress, loadSuccess } from '@/library/infrastructure/primary/Loader.ts';
+import { Loader, loadError, loadInProgress, loadSuccess } from '@/library/infrastructure/primary/Loader.ts';
+import {reactLoadFor} from "@/library/infrastructure/primary/reactLoadFor.ts";
 
 const BookInfoComponent = ({ book }: { book: Book }) => {
   const { t } = useTranslation();
@@ -36,7 +37,7 @@ export const BookComponent = (props: { isbn: ISBN }) => {
       .catch((error: Error) => setBookLoader(loadError(error.message)));
   }, [props.isbn]);
 
-  return loadFor(bookLoader)({
+  return reactLoadFor(bookLoader)({
     progress: () => <p data-selector="book.loading">{t('book.inProgress')}</p>,
     error: message => <p data-selector="book.error">{message}</p>,
     success: book => <BookInfoComponent book={book} />,
