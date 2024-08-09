@@ -29,10 +29,13 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        browsers:
+        browser:
           - chrome
           - firefox
           - edge
+        start:
+          - npm run react:component:serve
+          - npm run vue:component:serve
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -40,8 +43,8 @@ jobs:
         uses: cypress-io/github-action@v6
         with:
           config-file: 'test/component/cypress.config.ts'
-          start: npm run vue:component:serve
-          browser: ${{ matrix.browsers }}
+          start: ${{ matrix.start }}
+          browser: ${{ matrix.browser }}
 
   status-checks:
     name: status-checks
