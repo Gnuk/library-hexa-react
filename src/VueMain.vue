@@ -3,5 +3,5 @@
   <VueModalArea />
 </template>
 <script setup lang="ts">
-import VueModalArea from "@/modal/VueModalArea.vue";
+import {VueModalArea} from "@/modal/vue.ts";
 </script>

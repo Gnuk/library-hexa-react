@@ -12,4 +12,9 @@ export default defineConfig({
     port: 3030,
   },
   envDir: path.resolve(__dirname, 'config', 'vue'),
+  build: {
+    rollupOptions: {
+      external: [new RegExp(/\.svelte/)],
+    },
+  },
 });

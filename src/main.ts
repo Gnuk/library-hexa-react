@@ -1,4 +1,4 @@
-async function createFor(fwk: string): Promise<() => void> {
+const createFor = async (fwk: string): Promise<() => void> => {
   if (fwk === 'vue') {
     const { createVue } = await import('@/vue.ts');
     return createVue;
@@ -7,8 +7,12 @@ async function createFor(fwk: string): Promise<() => void> {
     const { createReact } = await import('@/react.tsx');
     return createReact;
   }
+  if (fwk === 'svelte') {
+    const { createSvelte } = await import('@/svelte.ts');
+    return createSvelte;
+  }
   throw new Error(`There is no way to create the framework ${fwk}`);
-}
+};
 
 const main = async () => {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
